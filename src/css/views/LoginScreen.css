@@ -1,0 +1,102 @@
+.main-auth-container {
+        background: #fff;
+
+        width: 100vw;
+        height: 100vh;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+       overflow-y: scroll;  /* scroll */
+        overflow-x: hidden;
+}
+
+#logo {
+        /* width: 40vw;
+        height: 40vw; */
+        width: 250px;
+        height: 250px;
+}
+
+#form-container {
+        width: 450px;
+        background: #000;
+        border-radius: 10px;
+        padding: 10px;
+        padding-top: 15px;
+
+
+}
+
+#text-login {
+        color: #fff;
+        font-family: 'Roboto', sans-serif;
+}
+
+#hr {
+        color: #fff;
+        height: 2px;
+        margin-bottom: 20px;
+}
+
+.input-regular {
+        width: 100%;
+        border-radius: 8px;
+        padding: 5px 5px;
+        font-size: 15px;
+        font-family: 'Roboto', sans-serif;
+        margin-bottom: 10px;
+}
+
+
+#button-login-container {
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 10px;
+        margin-bottom: 30px;
+}
+
+#button-login {
+        padding-left: 40px;
+        padding-right: 40px;
+        margin-bottom: 20px;
+}
+
+#form-label {
+        color: #fff;
+        font-family: 'Roboto', sans-serif;
+        font-size: 15px;
+        font-weight: 100;
+}
+
+#warning-text {
+        color: rgb(176, 179, 16);
+        font-size: 11px;
+}
+
+#footer-container {
+        width: 450px;
+        border-radius: 10px;
+        padding: 10px;
+        padding-bottom: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+}
+
+#footer-text {
+        color: #000;
+        font-family: 'Roboto', sans-serif;
+        font-size: 13px;
+}
+
+#footer-link {
+        color: rgb(26, 64, 235);
+        font-family: 'Roboto', sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+}
