@@ -22,7 +22,6 @@ export const signInApiHandler =  async ({email, password}) => {
 
         return response;
     } catch (e) {
-        console.warn(e);
         showFailedToast("Internal Server Error - code [500]");
     }
 }
@@ -37,7 +36,6 @@ export const getSupplierApiHandler = async () => {
         let response = await axios.get(url,  { headers: {"Authorization" : `Bearer ${JSON.parse(token)}`} });
         return response;
     } catch (e) {
-        console.warn(e);
         showFailedToast("Internal Server Error - code [500]");
     }
 }
@@ -52,7 +50,6 @@ export const getOrderByDateRangeApiHandler = async ({startDate, endDate}) => {
         let response = await axios.get(url,  { headers: {"Authorization" : `Bearer ${JSON.parse(token)}`} });
         return response;
     } catch (e) {
-        console.warn(e);
         showFailedToast("Internal Server Error - code [500]");
     }
 }
@@ -70,7 +67,6 @@ export const ediSupplierApiHandler =  async ({id, name, state}) => {
 
         return response;
     } catch (e) {
-        console.warn(e);
         showFailedToast("Internal Server Error - code [500]");
     }
 }
