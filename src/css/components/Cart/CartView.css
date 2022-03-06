@@ -46,3 +46,11 @@
 #table-btn {
         width: 100px;
 }
+
+#table-input {
+        width: 300px;
+}
+
+#table-btn-submit {
+        color: blue;
+}

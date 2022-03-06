@@ -54,7 +54,7 @@ export const getOrderByDateRangeApiHandler = async ({startDate, endDate}) => {
     }
 }
 
-export const ediSupplierApiHandler =  async ({id, name, state}) => {
+export const ediSupplierApiHandler =  async ({id, name, state, endpoint}) => {
     let url = baseURL + editSupplierURL
     try {
         let token = await localStorage.getItem('token');
@@ -62,6 +62,7 @@ export const ediSupplierApiHandler =  async ({id, name, state}) => {
             id: id,
             name: name,
             state: state,
+            url: endpoint
         },
             { headers: {"Authorization" : `Bearer ${JSON.parse(token)}`} });
 

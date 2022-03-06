@@ -13,7 +13,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {Button} from "reactstrap";
+import {Button, Input, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 // MUI icons
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
@@ -52,6 +52,9 @@ function CartView() {
 
     const [selectSuppliers, setSelectSuppliers] = useState([]);
     const [rows, setRow] = useState([]);
+    let [isModalOpen, setIsModalOpen] = useState(false);
+    let [text, setText] = useState('');
+    let [selectRow, setSelectRow] = useState(null);
 
     let [isLoading, setIsLoading] = useState(false);
 
@@ -86,7 +89,7 @@ function CartView() {
     }, [selectSuppliers]);
 
 
-    const buttonHandler = async (data) => {
+    const buttonHandler = async (data, defaultUrl) => {
         setIsLoading(true);
 
         let state = (Number(data.state) < 2) ? 2 : 1;
@@ -94,14 +97,17 @@ function CartView() {
         let sample = {
             id: Number(data.id),
             name: data.name,
+            endpoint: defaultUrl ? data.endpoint : text,
             state: Number(state)
         }
+
 
         let response = await ediSupplierApiHandler(sample);
         let {code, result} = response?.data
         if (code === '200') {
             getSupplierHandler();
             showSuccessToast('Update success!')
+            setIsModalOpen(false);
         } else {
             showFailedToast('Update failed')
         }
@@ -133,10 +139,25 @@ function CartView() {
                                         {row.name}
                                     </StyledTableCell>
                                     <StyledTableCell
-                                        align="center">{(row.endpoint != null) ? row.endpoint : 'No Data'}</StyledTableCell>
+                                        align="center">
+                                        <input id='table-input' value={(row.endpoint ? row.endpoint : '')} onChange={() => {}} />
+                                        <Button
+                                            onClick={() => {
+                                                setIsModalOpen(true);
+                                                setText(row?.endpoint)
+                                                setSelectRow(row)
+                                                // buttonHandler(row);
+                                            }}
+                                            id='table-btn-submit'
+                                            color={'transparent'}
+                                        >
+                                           update
+                                        </Button>
+                                        {/*{(row.endpoint != null) ? row.endpoint : 'No Data'}*/}
+                                    </StyledTableCell>
                                     <StyledTableCell align="center">
                                         <Button
-                                            onClick={() => buttonHandler(row)}
+                                            onClick={() => buttonHandler(row, true)}
                                             id='table-btn'
                                             color={'light'}
                                         >
@@ -151,6 +172,48 @@ function CartView() {
 
 
             </section>
+
+
+
+
+            {/*modal*/}
+
+            <Modal toggle={function noRefCheck(){}}  isOpen={isModalOpen}>
+                <ModalHeader toggle={() => setIsModalOpen(false)}>
+                    Modal title
+                </ModalHeader>
+                <ModalBody>
+                    <Input
+                        placeholder=""
+                        rows={5}
+                        type="textarea"
+                        value={text}
+                        onChange={(val) => setText(val.target.value)}
+                    />
+                </ModalBody>
+                <ModalFooter>
+                    <Button
+                        color="primary"
+                        onClick={() => buttonHandler(selectRow, false)}
+                    >
+                       update
+                    </Button>
+                    {' '}
+                    <Button onClick={() => setIsModalOpen(false)}>
+                        Cancel
+                    </Button>
+                </ModalFooter>
+            </Modal>
+
+
+
+
+
+
+
+
+
+
 
             <Loader isLoading={isLoading}/>
             {/* toast : important */}
